@@ -24,5 +24,5 @@ interface CardDBDao {
 
 
     @Query("SELECT * FROM cardMainInfoTable ORDER BY bin DESC")
-    suspend fun getAllCard(): LiveData<List<CardMainInfo>>
+    suspend fun getAllCard(): List<CardMainInfo>
 }

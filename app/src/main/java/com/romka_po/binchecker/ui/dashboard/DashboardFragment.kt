@@ -13,17 +13,24 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
+import com.romka_po.binchecker.CardDB
 import com.romka_po.binchecker.MainActivity
 import com.romka_po.binchecker.adapters.ApiAdapter
 import com.romka_po.binchecker.databinding.FragmentDashboardBinding
 import com.romka_po.binchecker.model.Card
+import com.romka_po.binchecker.model.Resource
+import com.romka_po.binchecker.repositories.CardRepository
 import com.romka_po.binchecker.ui.CardViewModel
+import com.romka_po.binchecker.ui.CardViewModelProviderFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import java.io.Console
@@ -32,8 +39,7 @@ class DashboardFragment : Fragment(), CoroutineScope by MainScope() {
 
     private var _binding: FragmentDashboardBinding? = null
     lateinit var viewModel: CardViewModel
-    // This property is only valid between onCreateView and
-    // onDestroyView.
+    val TAG = "DashboardFragment"
     private val binding get() = _binding!!
     private lateinit var bankLabel:TextView
     private lateinit var phoneLabel:TextView
@@ -57,56 +63,73 @@ class DashboardFragment : Fragment(), CoroutineScope by MainScope() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val repository = CardRepository(CardDB(requireActivity().applicationContext))
+        val viewModelProviderFactory = CardViewModelProviderFactory(repository)
+        viewModel = ViewModelProvider(this, viewModelProviderFactory).get(CardViewModel::class.java)
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        connectXML()
-        binInput.addTextChangedListener(object :TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-                if (binInput.text?.length ==8){
-                    getInfo(binInput.text.toString(), container!!)
-                }
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-            }
-
-        })
 
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = (activity as MainActivity).viewModel
-    }
-
-    fun getInfo(string: String, viewGroup: ViewGroup){
-        launch(Dispatchers.Main) {
-            try {
-                val response = ApiAdapter.apiClient.getInfoCard(string)
-                if (response.isSuccessful && response.body() != null) {
-                    val data = response.body()!!
-                    checkAll(data)
-                } else {
-                    Toast.makeText(
-                        context,
-                        "Server is not available",
-                        Toast.LENGTH_LONG).show()
-                    Log.d("else", response.message())
+        connectXML()
+        var job: Job? = null
+        binInput.addTextChangedListener {editable ->
+            job?.cancel()
+            job = MainScope().launch {
+                editable?.let {
+                    if (editable.toString().length==8){
+                        viewModel.getInfoCard(editable.toString())
+                    }
                 }
-            } catch (e: Exception) {
-                Toast.makeText(context,
-                    "Internet doesn`t work",
-                    Toast.LENGTH_LONG).show()
-                e.message?.let { Log.d("try", it) }
             }
         }
+
+        viewModel.searchCard.observe(viewLifecycleOwner, Observer {response->
+            when(response){
+                is Resource.Success ->{
+                    //hideProgressBar()
+                    val data = response.data
+                    checkAll(data!!)
+                }
+                is Resource.Error-> {
+                    //hideProgressBar()
+                    response.message?.let { message->
+                        Log.e(TAG, message)
+                    }
+                }
+                is Resource.Loading ->{
+                    //showProgressBar
+                }
+            }
+        })
     }
+
+//    fun getInfo(string: String, viewGroup: ViewGroup){
+//        launch(Dispatchers.Main) {
+//            try {
+//                val response = ApiAdapter.apiClient.getInfoCard(string)
+//                if (response.isSuccessful && response.body() != null) {
+//                    val data = response.body()!!
+//                    checkAll(data)
+//                } else {
+//                    Toast.makeText(
+//                        context,
+//                        "Server is not available",
+//                        Toast.LENGTH_LONG).show()
+//                    Log.d("else", response.message())
+//                }
+//            } catch (e: Exception) {
+//                Toast.makeText(context,
+//                    "Internet doesn`t work",
+//                    Toast.LENGTH_LONG).show()
+//                e.message?.let { Log.d("try", it) }
+//            }
+//        }
+//    }
 
     fun checkAll(data:Card){
         bankLabel.text = data.bank?.name

@@ -40,7 +40,7 @@ data class CardMainInfo(
 data class CountryInfo(
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "country")
-    var name: String? = null,
+    var name: String= "",
 
     @ColumnInfo(name="currency")
     var currency: String? = null,
@@ -57,7 +57,7 @@ data class BankInfo(
 
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name = "bank")
-    var name: String? = null,
+    var name: String = "",
 
     @ColumnInfo(name = "url")
     var url: String? = null,

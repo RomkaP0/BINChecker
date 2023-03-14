@@ -14,7 +14,6 @@ class Card {
 
 }
 
-
 class Bank {
     var name: String? = null
     var url: String? = null

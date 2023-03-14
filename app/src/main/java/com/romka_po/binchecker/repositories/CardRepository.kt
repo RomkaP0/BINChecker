@@ -2,6 +2,7 @@ package com.romka_po.binchecker.repositories
 
 import com.romka_po.binchecker.CardDB
 import com.romka_po.binchecker.adapters.ApiAdapter
+import com.romka_po.binchecker.model.CardMainInfo
 
 class CardRepository(
     val db:CardDB){
@@ -9,25 +10,7 @@ class CardRepository(
     suspend fun getInfoCard(string: String)=
       ApiAdapter.apiClient.getInfoCard(string)
 
-}
+    suspend fun insert(card:CardMainInfo) = db.getCardDBDao().insert(card)
 
-//launch(Dispatchers.Main) {
-//            try {
-//                val response = ApiAdapter.apiClient.getInfoCard(string)
-//                if (response.isSuccessful && response.body() != null) {
-//                    val data = response.body()!!
-//                    checkAll(data)
-//                } else {
-//                    Toast.makeText(
-//                        context,
-//                        "Server is not available",
-//                        Toast.LENGTH_LONG).show()
-//                    Log.d("else", response.message())
-//                }
-//            } catch (e: Exception) {
-//                Toast.makeText(context,
-//                    "Internet doesn`t work",
-//                    Toast.LENGTH_LONG).show()
-//                e.message?.let { Log.d("try", it) }
-//            }
-//        }
+    fun getAllCard() =db.getCardDBDao().getAllCard()
+}

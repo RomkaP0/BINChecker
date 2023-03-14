@@ -14,18 +14,18 @@ import com.romka_po.binchecker.databinding.CardrvBinding
 import com.romka_po.binchecker.model.CardMainInfo
 
 
-class CardHistoryRVAdapter: RecyclerView.Adapter<CardHistoryRVAdapter.CardViewHolder>(
-    ) {
-    inner class CardViewHolder(val binding:CardrvBinding):RecyclerView.ViewHolder(binding.root)
+class CardHistoryRVAdapter : RecyclerView.Adapter<CardHistoryRVAdapter.CardViewHolder>(
+) {
+    inner class CardViewHolder(val binding: CardrvBinding) : RecyclerView.ViewHolder(binding.root)
 
 
-    private val differCallback = object :DiffUtil.ItemCallback<CardMainInfo>(){
+    private val differCallback = object : DiffUtil.ItemCallback<CardMainInfo>() {
         override fun areItemsTheSame(oldItem: CardMainInfo, newItem: CardMainInfo): Boolean {
-            return oldItem.bin==newItem.bin
+            return oldItem.bin == newItem.bin
         }
 
         override fun areContentsTheSame(oldItem: CardMainInfo, newItem: CardMainInfo): Boolean {
-            return oldItem==newItem
+            return oldItem == newItem
         }
 
     }
@@ -34,9 +34,7 @@ class CardHistoryRVAdapter: RecyclerView.Adapter<CardHistoryRVAdapter.CardViewHo
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         return CardViewHolder(
             CardrvBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
+                LayoutInflater.from(parent.context), parent, false
             )
         )
     }
@@ -46,9 +44,9 @@ class CardHistoryRVAdapter: RecyclerView.Adapter<CardHistoryRVAdapter.CardViewHo
     }
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
-    val card = differ.currentList[position]
+        val card = differ.currentList[position]
         holder.binding.apply {
-            cardRVNum.text=card.bin.toString()
+            cardRVNum.text = card.bin.toString()
             cardRVBank.text = card.bank
 
             setOnClickListener {
@@ -58,9 +56,10 @@ class CardHistoryRVAdapter: RecyclerView.Adapter<CardHistoryRVAdapter.CardViewHo
             }
         }
     }
-    private  var onItemClickListener: ((CardMainInfo)->Unit)?=null
 
-    fun setOnClickListener(listener: (CardMainInfo) -> Unit){
+    private var onItemClickListener: ((CardMainInfo) -> Unit)? = null
+
+    fun setOnClickListener(listener: (CardMainInfo) -> Unit) {
         onItemClickListener = listener
     }
 }

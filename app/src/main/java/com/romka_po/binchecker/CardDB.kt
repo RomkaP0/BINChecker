@@ -5,11 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.romka_po.binchecker.interfaces.CardDBDao
-import com.romka_po.binchecker.model.BankInfo
 import com.romka_po.binchecker.model.CardMainInfo
-import com.romka_po.binchecker.model.CountryInfo
 
-@Database(entities = [CardMainInfo::class, CountryInfo::class, BankInfo::class], version = 1, exportSchema = false)
+//@Database(entities = [CardMainInfo::class, CountryInfo::class, BankInfo::class], version = 1, exportSchema = false)
+@Database(entities = [CardMainInfo::class], version = 1, exportSchema = false)
+
 abstract class CardDB: RoomDatabase() {
     abstract fun getCardDBDao(): CardDBDao
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.dashboard.DashboardFragment">
+    tools:context=".ui.search.SearchCardFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -205,31 +205,20 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/latLabel"
                 style="@style/HintText"
-                android:text="LATITUDE"
+                android:text="GEO: "
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/country" />
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/lat"
                 style="@style/HintText"
                 android:freezesText="true"
+                android:text="geo:55.869555,37.503964?z=15"
+                android:autoLink="map"
                 android:layout_marginStart="4dp"
                 app:layout_constraintStart_toEndOf="@id/latLabel"
                 app:layout_constraintTop_toBottomOf="@id/country" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/longLabel"
-                style="@style/HintText"
-                android:text="LONGITUDE"
-                android:layout_marginStart="4dp"
-                app:layout_constraintStart_toEndOf="@id/lat"
-                app:layout_constraintTop_toBottomOf="@id/country" />
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/longitude"
-                style="@style/HintText"
-                android:freezesText="true"
-                android:layout_marginStart="4dp"
-                app:layout_constraintStart_toEndOf="@id/longLabel"
-                app:layout_constraintTop_toBottomOf="@id/country" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>

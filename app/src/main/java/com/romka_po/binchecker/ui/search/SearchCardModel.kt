@@ -23,7 +23,9 @@ class SearchCardModel(
         searchCard.postValue(Resource.Loading())
         val responce = cardRepository.getInfoCard(bin)
         searchCard.postValue(handleSearchCardInfoResponse(responce, bin ))
+
     }
+
     private fun handleSearchCardInfoResponse(responce: Response<Card>, bin: String):Resource<Card>{
         if (responce.isSuccessful){
             responce.body()?.let { resultResponce ->
@@ -41,4 +43,6 @@ class SearchCardModel(
     fun getCurrentDateTime(): Date {
         return Calendar.getInstance().time
     }
+
+
 }

@@ -13,4 +13,6 @@ class CardRepository(
     suspend fun insert(card:CardMainInfo) = db.getCardDBDao().insert(card)
 
     fun getAllCard() =db.getCardDBDao().getAllCard()
+
+    suspend fun clear() = db.getCardDBDao().clear()
 }

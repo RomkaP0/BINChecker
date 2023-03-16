@@ -20,7 +20,7 @@ interface CardDBDao {
     fun get(key: Int): CardMainInfo?
 
     @Query("DELETE FROM cardMainInfoTable")
-    fun clear()
+    suspend fun clear()
 
 
     @Query("SELECT * FROM cardMainInfoTable ORDER BY datequery DESC")

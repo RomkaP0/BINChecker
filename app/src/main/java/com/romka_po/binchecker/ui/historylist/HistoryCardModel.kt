@@ -8,4 +8,6 @@ class HistoryCardModel(
 ): ViewModel() {
 
     fun getSavedCard() = cardRepository.getAllCard()
+
+    suspend fun clear() = cardRepository.clear()
 }

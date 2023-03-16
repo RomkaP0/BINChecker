@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.romka_po.binchecker.CardDB
+import com.romka_po.binchecker.R
 import com.romka_po.binchecker.adapters.CardHistoryRVAdapter
 import com.romka_po.binchecker.databinding.FragmentHistoryListBinding
 import com.romka_po.binchecker.repositories.CardRepository
@@ -45,7 +47,13 @@ class HistoryCardFragment : Fragment() {
         recyclerView = binding.rv
         setupRecyclerView()
 
-
+        cardAdapter.setOnItemClickListener{
+            val bundle = Bundle().apply {
+                putString("bin", it.bin)
+            }
+            findNavController().navigate(R.id.navigation_search_card,bundle
+            )
+        }
 
         viewModel.getSavedCard().observe(viewLifecycleOwner, Observer { cards ->
             cardAdapter.differ.submitList(cards)
@@ -61,6 +69,7 @@ class HistoryCardFragment : Fragment() {
         recyclerView.apply {
             adapter = cardAdapter
             layoutManager = LinearLayoutManager(activity)
+
         }
     }
 }

@@ -9,12 +9,34 @@
     <fragment
         android:id="@+id/navigation_search_card"
         android:name="com.romka_po.binchecker.ui.search.SearchCardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_search_card" />
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_search_card" >
+        <action
+            android:id="@+id/action_navigation_search_card_to_navigation_history_list"
+            app:destination="@id/navigation_history_list"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            />
+        <argument
+            android:name="bin"
+            app:argType="string"
+            android:defaultValue="-1" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_history_list"
         android:name="com.romka_po.binchecker.ui.historylist.HistoryCardFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_history_list" />
+        android:label="@string/title_history"
+        tools:layout="@layout/fragment_history_list" >
+        <action
+            android:id="@+id/action_navigation_history_list_to_navigation_search_card"
+            app:destination="@id/navigation_search_card"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
 </navigation>

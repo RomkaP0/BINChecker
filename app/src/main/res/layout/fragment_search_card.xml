@@ -14,7 +14,11 @@
         android:layout_margin="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxCornerRadiusBottomEnd="20dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/binInput"
@@ -36,7 +40,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
-        app:cardCornerRadius="8dp"
+        app:cardCornerRadius="20dp"
+        android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -212,8 +217,6 @@
                 android:id="@+id/lat"
                 style="@style/HintText"
                 android:freezesText="true"
-                android:text="geo:55.869555,37.503964?z=15"
-                android:autoLink="map"
                 android:layout_marginStart="4dp"
                 app:layout_constraintStart_toEndOf="@id/latLabel"
                 app:layout_constraintTop_toBottomOf="@id/country" />
@@ -222,4 +225,11 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+    <ProgressBar
+        android:id="@+id/searchprogressbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="12dp"
+        android:padding="70dp"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@ import com.romka_po.binchecker.model.CardMainInfo
 
 @Dao
 interface CardDBDao {
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(card: CardMainInfo)
 
     @Update
@@ -23,6 +23,6 @@ interface CardDBDao {
     fun clear()
 
 
-    @Query("SELECT * FROM cardMainInfoTable ORDER BY bin DESC")
+    @Query("SELECT * FROM cardMainInfoTable ORDER BY datequery DESC")
     fun getAllCard(): LiveData<List<CardMainInfo>>
 }

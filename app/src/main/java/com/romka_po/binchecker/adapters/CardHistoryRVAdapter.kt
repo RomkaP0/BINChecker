@@ -1,17 +1,15 @@
 package com.romka_po.binchecker.adapters
 
 import android.view.LayoutInflater
-import android.view.OnReceiveContentListener
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.recyclerview.widget.AsyncDifferConfig
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.romka_po.binchecker.R
 import com.romka_po.binchecker.databinding.CardrvBinding
 import com.romka_po.binchecker.model.CardMainInfo
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 
 class CardHistoryRVAdapter : RecyclerView.Adapter<CardHistoryRVAdapter.CardViewHolder>(
@@ -46,20 +44,26 @@ class CardHistoryRVAdapter : RecyclerView.Adapter<CardHistoryRVAdapter.CardViewH
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         val card = differ.currentList[position]
         holder.binding.apply {
-            cardRVNum.text = card.bin.toString()
+            cardRVNum.text = card.bin
             cardRVBank.text = card.bank
+            cardRVDate.text = card.date?.toString("dd/MM/yyyy")
 
-            setOnClickListener {
-                onItemClickListener?.let {
-                    it(card)
-                }
-            }
+        }
+        holder.itemView.setOnClickListener {
+            onItemClickListener?.let { it(card) }
         }
     }
 
     private var onItemClickListener: ((CardMainInfo) -> Unit)? = null
 
-    fun setOnClickListener(listener: (CardMainInfo) -> Unit) {
+    fun setOnItemClickListener(listener: (CardMainInfo) -> Unit) {
         onItemClickListener = listener
     }
+
+    fun Date.toString(format: String, locale: Locale = Locale.getDefault()): String {
+        val formatter = SimpleDateFormat(format, locale)
+        return formatter.format(this)
+    }
+
+
 }

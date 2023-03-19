@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.search.SearchCardFragment">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="0dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:boxCornerRadiusBottomStart="20dp"
+        app:boxCornerRadiusTopEnd="20dp"
+        app:boxCornerRadiusTopStart="20dp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        android:elevation="10dp"
+        app:layout_constraintWidth_percent="0.35">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/binInput"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="4dp"
+            android:autoSizeTextType="uniform"
+            android:autofillHints="creditCardNumber"
+            android:textAlignment="center"
+            android:hint="Enter the first digits of a card number (BIN/IIN)"
+            android:textSize="40sp"
+            android:backgroundTint="#00000000"
+            android:inputType="number"
+            android:maxLength="8" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardBank"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="24dp"
+        android:elevation="10dp"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textInputLayout"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="4dp"
+            android:paddingHorizontal="10dp">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/bankLabel"
+                style="@style/HintText"
+                android:text="BANK"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/bankName"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:autoSizeTextType="uniform"
+
+                android:freezesText="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bankLabel" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/phoneLabel"
+                style="@style/HintText"
+                android:text="PHONE"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/bankName" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/urlLabel"
+                style="@style/HintText"
+                android:text="URL"
+                app:layout_constraintStart_toStartOf="@id/url"
+                app:layout_constraintTop_toBottomOf="@id/bankName" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/phone"
+                style="@style/MainTextTemplate"
+                android:autoLink="phone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phoneLabel" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/url"
+                style="@style/MainTextTemplate"
+                android:layout_marginStart="72dp"
+                android:autoLink="web"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/urlLabel" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/companyLabel"
+                style="@style/HintText"
+                android:text="SCHEME / NETWORK"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phone" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/brandLabel"
+                style="@style/HintText"
+                android:text="BRAND"
+                app:layout_constraintStart_toStartOf="@id/brand"
+                app:layout_constraintTop_toBottomOf="@id/url" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/company"
+                style="@style/MainTextTemplate"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/companyLabel" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/brand"
+                style="@style/MainTextTemplate"
+
+                app:layout_constraintStart_toStartOf="@id/url"
+                app:layout_constraintTop_toBottomOf="@id/brandLabel" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/typeLabel"
+                style="@style/HintText"
+                android:text="TYPE"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/company" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/prepaidLabel"
+                style="@style/HintText"
+                android:text="PREPAID"
+                app:layout_constraintStart_toStartOf="@id/prepaid"
+                app:layout_constraintTop_toBottomOf="@id/brand" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/lengthLabel"
+                style="@style/HintText"
+                android:layout_marginStart="16dp"
+                android:text="LEN"
+                app:layout_constraintStart_toEndOf="@id/prepaidLabel"
+                app:layout_constraintTop_toBottomOf="@id/brand" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/luhnLabel"
+                style="@style/HintText"
+                android:layout_marginStart="16dp"
+                android:text="LUHN"
+                app:layout_constraintStart_toEndOf="@id/lengthLabel"
+                app:layout_constraintTop_toBottomOf="@id/brand" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/type"
+                style="@style/MainTextTemplate"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/typeLabel" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/prepaid"
+                style="@style/MainTextTemplate"
+
+                app:layout_constraintStart_toStartOf="@id/brand"
+                app:layout_constraintTop_toBottomOf="@id/prepaidLabel" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/length"
+                style="@style/MainTextTemplate"
+
+                app:layout_constraintStart_toStartOf="@id/lengthLabel"
+                app:layout_constraintTop_toBottomOf="@id/prepaidLabel" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/luhn"
+                style="@style/MainTextTemplate"
+
+                app:layout_constraintStart_toStartOf="@id/luhnLabel"
+                app:layout_constraintTop_toBottomOf="@id/prepaidLabel" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/countryLabel"
+                style="@style/HintText"
+                android:text="COUNTRY"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/type" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/currencyLabel"
+                style="@style/HintText"
+                android:text="CURRENCY"
+                app:layout_constraintStart_toStartOf="@id/currency"
+                app:layout_constraintTop_toBottomOf="@id/type" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/country"
+                style="@style/MainTextTemplate"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/countryLabel" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/currency"
+                style="@style/MainTextTemplate"
+
+                app:layout_constraintStart_toStartOf="@id/length"
+                app:layout_constraintTop_toBottomOf="@id/countryLabel" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/latLabel"
+                style="@style/HintText"
+                android:text="GEO: "
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/country" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/lat"
+                style="@style/HintText"
+                android:layout_marginStart="4dp"
+                android:freezesText="true"
+                app:layout_constraintStart_toEndOf="@id/latLabel"
+                app:layout_constraintTop_toBottomOf="@id/country" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <ProgressBar
+        android:id="@+id/searchprogressbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="12dp"
+        android:padding="70dp"
+        android:visibility="gone"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
